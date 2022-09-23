@@ -60,7 +60,7 @@ jobs:
           SANITIZED_VERSION="${SEMVER//+/_}"
           echo "SANITIZED_VERSION $SANITIZED_VERSION"
           echo "------------"
-          echo "::set-output name=fullSemVer::$SANITIZED_VERSION"
+          echo "::s§et-output name=fullSemVer::$SANITIZED_VERSION"
           SANITIZED_BRANCH="${GITHUB_REF#refs/heads/}"
           GIT_HASH=$(git rev-parse --short "$GITHUB_SHA")
           echo "------------"
