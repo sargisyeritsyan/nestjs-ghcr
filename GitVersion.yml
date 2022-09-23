@@ -7,6 +7,30 @@ major-version-bump-message: '\+semver:\s?(breaking|major)'
 minor-version-bump-message: '\+semver:\s?(feature|minor)'
 patch-version-bump-message: '\+semver:\s?(fix|patch)'
 
+#branches:
+#  main:
+#    regex: ^master$
+#    mode: ContinuousDelivery
+#    tag: staging
+#    increment: Patch
+#    source-branches: [ 'feature', 'release', 'hotfix' ]
+#    prevent-increment-of-merged-branch-version: true
+#    is-mainline: true
+#    pre-release-weight: 55000
+#  release:
+#    regex: ^releases?[/-]
+#    mode: ContinuousDelivery
+#    tag: ''
+#    increment: None
+#    source-branches: [ 'main', 'hotfix', 'release' ]
+#    is-release-branch: true
+#  feature:
+#    regex: ^features?[/-]$
+#    mode: ContinuousDelivery
+#    tag: useBranchName
+#    increment: Patch
+#    source-branches: [ 'pull-request', 'main', 'release', 'feature', 'hotfix' ]
+
 
 #branches:
 #  master:
