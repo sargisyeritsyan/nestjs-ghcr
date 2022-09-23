@@ -3,17 +3,21 @@ ignore:
   sha: [ ]
 merge-message-formats: { }
 
+major-version-bump-message: '\+semver:\s?(breaking|major)'
+minor-version-bump-message: '\+semver:\s?(feature|minor)'
+patch-version-bump-message: '\+semver:\s?(fix|patch)'
 
-branches:
-  master:
-    regex: (^main$)
-    tag: ""
-    increment: Patch
-    is-release-branch: true
-  feature:
-    regex: ^feat?[/-]
-    tag: useBranchName
-    increment: Minor
+
+#branches:
+#  master:
+#    regex: (^main$)
+#    tag: ""
+#    increment: Patch
+#    is-release-branch: true
+#  feature:
+#    regex: ^feat?[/-]
+#    tag: useBranchName
+#    increment: Minor
 #  bugfix:
 #    regex: ^bugfix[/-]
 #    tag: useBranchName
