@@ -40,12 +40,12 @@ jobs:
         with:
           useConfigFile: true
 
-      - name: Login to GHCR
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: slapi-gh
-          password: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Login to GHCR
+#        uses: docker/login-action@v1
+#        with:
+#          registry: ghcr.io
+#          username: slapi-gh
+#          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract version and branch
         id: extract
@@ -54,7 +54,7 @@ jobs:
           SANITIZED_VERSION="${SEMVER//+/_}"
           echo "SANITIZED_VERSION $SANITIZED_VERSION"
           echo "------------"
-          echo "::s§et-output name=fullSemVer::$SANITIZED_VERSION"
+          echo "::set-output name=fullSemVer::$SANITIZED_VERSION"
           SANITIZED_BRANCH="${GITHUB_REF#refs/heads/}"
           GIT_HASH=$(git rev-parse --short "$GITHUB_SHA")
           echo "------------"
@@ -71,34 +71,36 @@ jobs:
       - name: Log Outputs
         run: |
           echo "OUTPUT ${{ steps.extract.outputs.fullSemVer }}"
+          echo "OUTPUT ${{ steps.gitversion.outputs.fullSemVer }}"
           echo "OUTPUT ${{ steps.extract.outputs.branch }}"
           echo "OUTPUT ${{ steps.extract.outputs.hash }}"
+          echo "ENV ${{ env.VERSION }}"
 
-      - name: Build and push Docker Image
-        uses: docker/build-push-action@v2
-        with:
-          context: ${{ env.DOCKER_CTX }}
-          file: ${{ env.DOCKER_FILE }}
-          builder: ${{ steps.buildx.outputs.name }}
-          push: true
-          load: false
-          tags: |
-            ${{ env.GH_IMAGE }}:${{ env.VERSION }}
-            ${{ env.GH_IMAGE }}:${{ steps.extract.outputs.hash }}
-          labels: |
-            branch=${{ steps.extract.outputs.branch }}
-            org.opencontainers.image.source=${{ github.repositoryUrl }}
-            org.opencontainers.image.revision=${{ steps.extract.outputs.hash }}
-            org.opencontainers.image.version=${{ env.VERSION }}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
-          build-args: |
-            BUILD_VERSION_ARG=${{ env.VERSION }}
-        env:
-          VERSION: ${{ steps.extract.outputs.fullSemVer }}
-
-      - name: Move cache
-        run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+#      - name: Build and push Docker Image
+#        uses: docker/build-push-action@v2
+#        with:
+#          context: ${{ env.DOCKER_CTX }}
+#          file: ${{ env.DOCKER_FILE }}
+#          builder: ${{ steps.buildx.outputs.name }}
+#          push: true
+#          load: false
+#          tags: |
+#            ${{ env.GH_IMAGE }}:${{ env.VERSION }}
+#            ${{ env.GH_IMAGE }}:${{ steps.extract.outputs.hash }}
+#          labels: |
+#            branch=${{ steps.extract.outputs.branch }}
+#            org.opencontainers.image.source=${{ github.repositoryUrl }}
+#            org.opencontainers.image.revision=${{ steps.extract.outputs.hash }}
+#            org.opencontainers.image.version=${{ env.VERSION }}
+#          cache-from: type=local,src=/tmp/.buildx-cache
+#          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
+#          build-args: |
+#            BUILD_VERSION_ARG=${{ env.VERSION }}
+#        env:
+#          VERSION: ${{ steps.extract.outputs.fullSemVer }}
+#
+#      - name: Move cache
+#        run: |
+#          rm -rf /tmp/.buildx-cache
+#          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
