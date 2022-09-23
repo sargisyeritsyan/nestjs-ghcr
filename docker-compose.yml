@@ -1,0 +1,16 @@
+services:
+  api:
+    container_name: api
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    volumes:
+      - /usr/src/app/dist
+      - /usr/src/app/node_modules
+      - .:/usr/src/app
+    env_file: .env.production
+    # Run a command against the development stage of the image
+    command: npm run start:prod
+    ports:
+      - '8463:8463'
