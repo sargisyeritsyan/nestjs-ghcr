@@ -3,6 +3,7 @@ ignore:
   sha: [ ]
 merge-message-formats: { }
 
+
 branches:
   master:
     regex: (^main$)
