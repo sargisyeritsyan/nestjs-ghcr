@@ -4,12 +4,10 @@ on:
   push:
     branches: [main]
 
-
 env:
   DOCKER_FILE: ./Dockerfile
   DOCKER_CTX: .
   GH_IMAGE: ghcr.io/sargisyeritsyan/nestjs-ghcr
-#  IMAGE_TAG: 1.0.${{ github.run_number }} # GITHUB_RUN_NUMBER }}
 
 jobs:
   build-image:
