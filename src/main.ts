@@ -16,7 +16,7 @@ import {
 
   await app
     .listen(PORT, HOST, () =>
-      console.log(`🚀  Server is listening on :: ${HOST}:${PORT}`),
+      console.log(`🚀  Server is listening on ::: ${HOST}:${PORT}`),
     )
     .catch((e) => {
       console.error(`❌  Error starting server, ${e}`);
