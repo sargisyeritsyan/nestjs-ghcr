@@ -1,5 +1,5 @@
 mode: ContinuousDelivery
-branches: {}
+branches: { }
 ignore:
-  sha: []
-merge-message-formats: {}
+  sha: [ ]
+merge-message-formats: { }
