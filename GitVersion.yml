@@ -8,7 +8,6 @@ minor-version-bump-message: '\+semver:\s?(feature|minor)'
 patch-version-bump-message: '\+semver:\s?(fix|patch)'
 
 
-
 #branches:
 #  main:
 #    regex: ^master$
