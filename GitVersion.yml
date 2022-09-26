@@ -9,7 +9,6 @@ ignore:
 merge-message-formats: { }
 
 
-
 #branches:
 #  main:
 #    regex: ^master$
