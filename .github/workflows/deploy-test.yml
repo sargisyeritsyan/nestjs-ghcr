@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+
+env:
+  DOCKER_FILE: ./Dockerfile
+  DOCKER_CTX: .
+  GH_IMAGE: ghcr.io/sargisyeritsyan/nestjs-ghcr
+
+jobs:
+
+  build:
+
+    name: Build Image
+    runs-on: ubuntu-latest
+
+
+    steps:
+
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Branch name
+        run: echo running on branch ${GITHUB_REF##*/}
+
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
+    
